@@ -129,7 +129,7 @@ router.get('/spotify/auth', function(req, res, next) {
 		querystring.stringify({
 		response_type: 'code',
 		client_id: settings.spotify.client_id,
-		scope: scope.splice(","),
+		scope: scope.join(" "),
 		redirect_uri: settings.spotify.redirect_uri,
 		state: state
 	}));
