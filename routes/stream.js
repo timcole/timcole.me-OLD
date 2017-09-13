@@ -3,7 +3,7 @@ var fetch = require('node-fetch');
 var router = express.Router();
 
 router.get('/', async function(req, res, next) {
-	var api = await fetch(`http://0.0.0.0:${req.app.get("port")}/api/stream`).then((data) => { return data.json() });
+	var api = await fetch(`http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/api/stream`).then((data) => { return data.json() });
 
 	res.render('stream/index', {
 		title: "Stream",
