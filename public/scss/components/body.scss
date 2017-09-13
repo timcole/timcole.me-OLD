@@ -1,0 +1,278 @@
+tc-body {
+	margin: 10px;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	flex: 1 100%;
+	max-width: 100vw;
+	align-items: center;
+	justify-content: center;
+
+	tc-container {
+		flex: 1;
+
+		&.fixed {
+			max-width: $container+60;
+		}
+
+		div.header {
+			background-color: $secondaryColor;
+			width: 100%;
+
+			h4 {
+				padding: 10px;
+				margin: 0;
+
+				span {
+					float: right;
+					margin-top: -2.5px;
+
+					i {
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
+		div.log {
+			background-color: $primaryColor;
+			height: calc(100vh - 240px);
+			max-height: calc(100vh - 240px);
+			overflow-y: auto;
+			padding: 5px;
+
+			div {
+				padding: 5px 10px;
+			}
+
+			span {
+				&.starting {
+					font-weight: bold;
+					color: #31b483;
+				}
+
+				&.dropped {
+					font-weight: bold;
+					color: #983939;
+
+					&:after { content: " was dropped from the server." }
+				}
+
+				&.joined {
+					font-weight: bold;
+					color: #399859;
+
+					&:after { content: " joined the server." }
+				}
+
+				&.died {
+					font-weight: bold;
+					color: #7f3998;
+
+					&:after { content: " was incapacitated." }
+				}
+
+				&.killed {
+					font-weight: bold;
+					color: #7f3998;
+				}
+
+				&.name {
+					font-weight: bold;
+					padding-right: 5px;
+
+					&[data-job="Civilian"] { color: rgb(153, 255, 102); }
+					&[data-job="Police"] { color: rgb(0, 102, 255); }
+					&[data-job="Deputy"] { color: rgb(255, 191, 0); }
+					&[data-job="Highway Patrol"] { color: rgb(102, 153, 255); }
+					&[data-job="EMS"] { color: rgb(255, 51, 153); }
+					&[data-job="Fire Department"] { color: rgb(255, 0, 0); }
+
+					&:after { content: ":"; }
+				}
+
+				&.ooc {
+					font-weight: bold;
+					color: rgb(88, 193, 221);
+
+					&:before { content: "[OOC] - " }
+					&:after { content: ": "; }
+				}
+
+				&.ad {
+					font-weight: bold;
+					color: rgb(171, 67, 227);
+
+					&:before { content: "[Advertisement] - " }
+					&:after { content: ": "; }
+				}
+			}
+		}
+
+		div.bio {
+			background-color: $primaryColor;
+			padding: 20px;
+
+			p {
+				margin: 0;
+				padding: 0;
+
+				a {
+					color: $accentColor;
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+
+				b {
+					color: lighten($primaryColor, 50%);
+				}
+			}
+		}
+
+		ins.adsbygoogle {
+			display: block !important;
+			margin: 0 auto;
+			margin-top: 25px;
+		}
+
+		div.error {
+			text-align: center;
+			margin-top: 50px;
+			cursor: default;
+
+			h1 {
+				font-size: 15rem;
+				margin: 0;
+				padding: 0;
+				color: $secondaryColor;
+				text-shadow: -1px -1px 0 $touchColor, 1px -1px 0 $touchColor, -1px 1px 0 $touchColor, 1px 1px 0 $touchColor;
+			}
+
+			h2 {
+				margin-top: -50px !important;
+				font-size: 5rem;
+				margin: 0;
+				padding: 0;
+				color: $secondaryColor;
+				text-shadow: -1px -1px 0 $touchColor, 1px -1px 0 $touchColor, -1px 1px 0 $touchColor, 1px 1px 0 $touchColor;
+			}
+
+			div {
+				display: inline-block;
+				margin: 50px;
+				padding: 10px;
+				color: lighten($touchColor, 10%);
+				border: 1px solid $touchColor;
+				border-radius: 5px;
+				background-color: $secondaryColor;
+
+				i {
+					vertical-align: middle;
+					margin-right: 10px;
+					margin-top: -4px;
+				}
+
+				h3 {
+					margin: 0;
+					padding: 0;
+					display: inline-block;
+				}
+			}
+		}
+	}
+
+	div.progress-bar {
+		position: relative;
+		height: 3px;
+		background: $accentColor;
+		margin-top: -3px;
+	}
+
+	div.playing {
+		background-color: $secondaryColor;
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		height: 100px;
+		align-items: center;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		flex: 1 100%;
+		width: 100%;
+		padding-bottom: 3px;
+
+		img {
+			width: 100px;
+		}
+
+		div {
+			vertical-align: middle;
+			margin: 0 15px 0 25px;
+			flex: 3 0px;
+
+			h1, h2 {
+				margin: 0;
+				padding: 0;
+			}
+
+			h2 {
+				font-weight: 100;
+			}
+
+			&.requester {
+				font-size: .6rem;
+				text-align: right;
+				flex-grow: 0;
+			}
+		}
+	}
+
+	table.playlist {
+		width: calc(100% - 30px);
+		margin: 0 auto;
+
+		img {
+			width: 50px;
+		}
+
+		td:nth-child(2){
+			font-size: 1.25rem;
+			font-weight: 500;
+
+			span {
+				font-size: .75rem;
+				font-weight: 100;
+			}
+		}
+
+		td:nth-child(3){
+			font-size: .75rem;
+			font-weight: 100;
+			text-align: right;
+
+			span {
+				font-size: 1.25rem;
+				font-weight: 500;
+			}
+		}
+	}
+}
+
+tc-footer {
+	width: 100%;
+	display: block;
+	text-align: center;
+	align-self: flex-end;
+	font-size: .85rem;
+	color: lighten($primaryColor, 20%);
+	margin-top: 10px;
+}

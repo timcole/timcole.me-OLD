@@ -1,0 +1,40 @@
+body#stream {
+	& * .container { max-width: calc(100% - 50px) !important; }
+
+	tc-body {
+		margin: 0;
+		height: calc(100vh - 111px);
+		overflow: hidden;
+
+		tc-container {
+			height: 100%;
+			overflow: hidden;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			flex: 1 100%;
+
+			#video {
+				order: 1;
+				height: 100%;
+				flex-grow: 1;
+			}
+
+			.chat {
+				order: 2;
+				width: 410px;
+				height: 100%;
+				background: darken($primaryColor, 5%);
+				color: $backgroundColor;
+			}
+
+			@media screen and (max-width: 820px) {
+				#video { width: 100vw; height: 275px; }
+				.chat { width: 100vw; }
+				& { flex-direction: column; }
+			}
+		}
+	}
+}

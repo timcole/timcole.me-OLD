@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>{% if video %}Video{% else %}Photo{% endif %} - [[ file ]] - Timothy Cole</title>
+	<link rel="stylesheet" href="/css/main.css?_=[[ rand ]]">
+
+	{% include "../parts/meta.html" ignore missing %}
+	<meta name="twitter:card" content="photo" />
+	<meta name="twitter:site" content="@ModestTim" />
+	<meta name="twitter:title" content="Screenshot - [[ file ]]" />
+	<meta name="twitter:image" content="[[ cdn ]][[ file ]]" />
+	<meta name="twitter:url" content="http://timcole.me/ss/[[ file ]]" />
+
+	<meta property="og:title" content="Screenshot - [[ file ]]" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="[[ cdn ]][[ file ]]" />
+	<meta property="og:site_name" content="Timothy Cole - Full Stack Developer" />
+	<meta property="og:description" content="Screenshot - [[ file ]]" />
+
+	<meta itemprop="name" content="Screenshot - [[ file ]]">
+	<meta itemprop="description" content="Screenshot - [[ file ]]">
+	<meta itemprop="image" content="[[ cdn ]][[ file ]]">
+
+	<meta name="msapplication-starturl" content="http://timcole.me/ss/[[ file ]]" />
+	<meta name="msapplication-TileImage" content="[[ cdn ]][[ file ]]"/>
+	<meta name="msapplication-TileColor" content="#ffffff"/>
+</head>
+<body id="screenshot">
+	{% include "../parts/menu.html" %}
+
+	<tc-body>
+		<tc-container>
+			{% if video %}
+			<video autoplay controls>
+				<source src="[[ cdn ]][[ file ]]" type="video/mp4" />
+				<h1 class="text-center">Your browser doesn't support HTML5 Video.</h1>
+			</video>
+			{% else %}
+			<img class="dp-2" src="[[ cdn ]][[ file ]]" alt="[[ file ]]">
+			{% endif %}
+		</tc-container>
+	</tc-body>
+
+	{% include "../parts/footer.html" %}
+
+	<script>
+		var menu = document.getElementsByTagName('tc-menu')[0].getElementsByTagName('ul')[0];
+		var dl_btn = document.createElement('a');
+		dl_btn.classList.add("meta-btn");
+		dl_btn.href = "[[ cdn ]][[ file ]]";
+		var dl = document.createElement('li');
+		dl.innerHTML = `<i class="icon">&#xE2C4;</i>Download</span>`;
+		dl.id = "meta--subscribe";
+		dl_btn.appendChild(dl);
+		menu.appendChild(dl_btn);
+	</script>
+	<script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+$primaryColor: #22293D;
+$secondaryColor: #1A2232;
+$backgroundColor: #252b3c;
+$touchColor: #303E60;
+$accentColor: #308bcd;
+$container: 1275px;
+$cubic: cubic-bezier(.64,.09,.08,1);
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.float-left { float: left; }
+.float-right { float: right; }
+.hide { display: none !important; }
+
+@import "components/header";
+@import "components/tooltips";
+@import "components/table";
+@import "components/body";
+@import "components/shadows";
+@import "components/columns";
+@import "components/stream";
+@import "components/screenshots";
+
+::selection {
+	background-color: lighten($primaryColor, 50%) !important;
+} ::-o-selection {
+	background-color: lighten($primaryColor, 50%) !important;
+} ::-ms-selection {
+	background-color: lighten($primaryColor, 50%) !important;
+} ::-moz-selection {
+	background-color: lighten($primaryColor, 50%) !important;
+} ::-webkit-selection {
+	background-color: lighten($primaryColor, 50%) !important;
+}

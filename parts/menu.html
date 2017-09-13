@@ -1,0 +1,48 @@
+<tc-header>
+	<main-menu>
+		<div class="container">
+			<a href="/"><tc-logo>
+				<img src="/images/logo.png" alt="Timothy Cole">
+				<h1>Timothy Cole</h1>
+			</tc-logo></a>
+			{% if search %}
+			<tc-search>
+				<i class="icon">&#xE8B6;</i>
+				<input type="text" name="text" placeholder="Search for a User" />
+			</tc-search>
+			{% else %}
+			<tc-search></tc-search>
+			{% endif %}
+			<div class="right social">
+				<a target="_blank" href="/ref/twitter">{% include "../public/images/icons/twitter.svg" %}</a>
+				<a target="_blank" href="/ref/twitch">{% include "../public/images/icons/twitch.svg" %}</a>
+				<a target="_blank" href="/ref/youtube">{% include "../public/images/icons/youtube.svg" %}</a>
+				<a target="_blank" href="/ref/instagram">{% include "../public/images/icons/instagram.svg" %}</a>
+				<a target="_blank" href="/ref/github">{% include "../public/images/icons/github.svg" %}</a>
+				<a target="_blank" href="/ref/linkedin">{% include "../public/images/icons/linkedin.svg" %}</a>
+				<a target="_blank" href="/ref/snapchat">{% include "../public/images/icons/snapchat.svg" %}</a>
+				<a target="_blank" href="/ref/reddit">{% include "../public/images/icons/reddit.svg" %}</a>
+			</div>
+			<i class="icon" style="display: none;">&#xE5D4;</i>
+			{% if search %}
+			<i class="icon" id="mobileSearch" style="display: none;">&#xE8B6;</i>
+			{% endif %}
+		</div>
+	</main-menu>
+	<tc-menu>
+		<div class="container">
+			<i class="icon" id="mobileMenu" style="display: none;">&#xE5D2;</i>
+			<ul>
+				<a href="/"><li>Home</li></a>
+				<a href="/setup"><li>Setup</li></a>
+				<a href="/stream"><li>Stream</li></a>
+			</ul>
+		</div>
+	</tc-menu>
+
+	{% if notification %}
+	<tc-notification class="[[ session.notification.flags ]]">
+		<div>[[ session.notification.message ]]{% if session.notification.flags.indexOf("closeable") != -1 %}<i class="material-icons">&#xE5CD;</i>{% endif %}</div>
+	</tc-notification>
+	{% endif %}
+</tc-header>

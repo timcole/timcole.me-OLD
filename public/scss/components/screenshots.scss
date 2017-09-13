@@ -1,0 +1,17 @@
+body#screenshot {
+	tc-body {
+		max-width: calc(100% - 50px);
+		margin: 15px auto;
+		text-align: center;
+
+		img {
+			width: 100%;
+			max-width: 100%;
+		}
+
+		video {
+			width: 100%;
+			max-width: $container;
+		}
+	}
+}

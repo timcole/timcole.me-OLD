@@ -1,0 +1,35 @@
+{
+  "name": "timcole-me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/www",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --ignore public/",
+    "start": "node bin/www"
+  },
+  "author": "Timothy Cole <tim@timcole.me>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "~1.13.2",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "dotenv": "^4.0.0",
+    "express": "~4.13.1",
+    "express-session": "^1.15.1",
+    "fs": "latest",
+    "morgan": "~1.6.1",
+    "node-fetch": "^1.7.2",
+    "path": "latest",
+    "querystring": "^0.2.0",
+    "redis": "^2.6.5",
+    "serve-favicon": "~2.3.0",
+    "swig": "latest"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>[[ title ]] - Timothy Cole</title>
+	<link rel="stylesheet" href="/css/main.css">
+
+	{% include "../../parts/meta.html" ignore missing %}
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="player">
+	<meta name="twitter:image:src" content="{% if api.stream.preview %}[[ api.stream.preview.large ]]{% else %}[[ api.stream.channel.video_banner ]]{% endif %}">
+	<meta name="twitter:image:width" content="640">
+	<meta name="twitter:image:height" content="360">
+	<meta name="twitter:player" content="https://player.twitch.tv/?channel=[[ api.stream.channel.name ]]&muted=true">
+	<meta name="twitter:player:width" content="640">
+	<meta name="twitter:player:height" content="360">
+	<meta name="twitter:site" content="@ModestTim">
+	<meta name="twitter:title" content="Stream - ({% if api.stream.stream_type %}Online{% else %}Offline{% endif %}) - Timothy Cole">
+	<meta name="twitter:description" content="Watch my live stream!">
+
+	<!-- OG Video Tags -->
+	<meta property="og:type" content="video">
+	<meta property="og:video:url" content="https://player.twitch.tv/?channel=[[ api.stream.channel.name ]]&muted=true">
+	<meta property="og:video:secure_url" content="https://player.twitch.tv/?channel=[[ api.stream.channel.name ]]&muted=true">
+	<meta property="og:video:type" content="text/html">
+	<meta property="og:video:width" content="1280">
+	<meta property="og:video:height" content="720">
+</head>
+<body id="stream">
+	{% include "../../parts/menu.html" %}
+
+	<tc-body>
+		<tc-container>
+			<div id="video"></div>
+			<iframe src="https://twitch.tv/[[ api.stream.channel.name ]]/chat" frameborder="0" scrolling="no" class="chat"></iframe>
+		</tc-container>
+	</tc-body>
+
+	<script type="text/javascript">
+		var meta = {};
+		meta.channel = "[[ api.stream.channel.display_name ]]";
+		meta.followers = ("[[ api.stream.channel.followers ]]" === "" ? -1 : [[ api.stream.channel.followers ]]);
+		meta.viewers = ("[[ api.stream.viewers ]]" === "" ? "Offline" : "[[ api.stream.viewers ]]");
+	</script>
+	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+	<script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+table {
+	width: 100%;
+	background-color: $primaryColor;
+	border-collapse: collapse;
+
+	thead {
+		background-color: $secondaryColor;
+
+		tr {
+			height: 30px;
+
+			th {
+				padding: 10px;
+				text-align: left;
+
+				&[width="50"] {
+					text-align: center;
+				}
+			}
+		}
+	}
+
+	tbody {
+		tr {
+			height: 50px;
+			border-bottom: 1px solid $touchColor;
+
+			td {
+				padding: 10px;
+
+				&:first-child, &:last-child {
+					// text-align: center;
+				}
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			&:hover {
+				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+				border-color: transparent;
+				cursor: pointer;
+			}
+		}
+	}
+}
