@@ -15,6 +15,14 @@ var generateState = (length) => {
 	return text;
 };
 
+var formBuilder = (obj) => {
+	var str = '';
+	for (var p in obj) {
+		if (obj.hasOwnProperty(p)) str += p + '=' + obj[p] + '&';
+	}
+	return str;
+}
+
 var authorization = async (redis, cb) => {
 	auth = await redis.getAsync("tc::auth::spotify");
 	if (auth == null) { cb({}, err || "Failed to location authorization token."); return; }
@@ -138,12 +146,14 @@ router.get('/spotify/auth/callback', async function(req, res, next) {
 		res.status(403).json({status: 403, errors: [ "State Mismatch." ]}); return;
 	} else {
 		var request = await fetch('https://accounts.spotify.com/api/token', {
-			body: {
+			method: "POST",
+			body: formBuilder({
 				code: code,
 				redirect_uri: settings.spotify.redirect_uri,
 				grant_type: 'authorization_code'
-			},
+			}),
 			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
 				'Authorization': 'Basic ' + (new Buffer(settings.spotify.client_id + ':' + settings.spotify.client_secret).toString('base64'))
 			}
 		}).then((data) => { return data.json() });
