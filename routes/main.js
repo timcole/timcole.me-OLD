@@ -8,6 +8,12 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+router.get('/setup', function(req, res, next) {
+	var err = new Error(`Don't worry you didn't break anything. I'm just to lazy to remake this page at the moment.`);
+	err.status = 200;
+	next(err);
+});
+
 router.get('/ss/:file', async function(req, res, next) {
 	var file = req.params.file;
 	var fileType = file.substring(file.length - 4);
