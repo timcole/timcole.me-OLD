@@ -29,9 +29,9 @@ swig.setDefaults({
 
 app.use(favicon(path.join(__dirname, 'public', '/images/logo.png')));
 app.enable('trust proxy');
-app.use(logger('dev', {
+app.use(logger('combined', {
 	skip: function (req, res) {
-		// return (req.headers['x-real-ip'] == "162.208.49.199" || typeof req.headers['x-real-ip'] == "undefined");
+		return (req.headers['x-real-ip'] == "162.208.49.199" || typeof req.headers['x-real-ip'] == "undefined");
 	}
 }));
 app.use(bodyParser.json());
