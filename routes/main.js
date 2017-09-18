@@ -63,9 +63,9 @@ router.get('/ref/:site', function(req, res, next) {
 			res.redirect('https://reddit.com/u/timothycole');
 			break;
 		default:
-		    var err = new Error('Not Found');
-		    err.status = 404;
-		    next(err);
+			var err = new Error('Not Found');
+			err.status = 404;
+			next(err);
 	}
 });
 

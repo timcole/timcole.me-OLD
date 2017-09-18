@@ -9,6 +9,7 @@ var session = require('express-session');
 var redis = require('redis');
 var redisStore = require('connect-redis')(session);
 var bluebird = require('bluebird');
+var fetch = require('node-fetch');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
@@ -47,6 +48,27 @@ app.use('/api', require('./routes/api/main'));
 app.use('/stream', require('./routes/stream'));
 
 app.use(function(req, res, next) {
+	if (req.headers['x-real-ip'] != "162.208.49.199") {
+		if (req.path.indexOf("/phpmyadmin") != -1 || req.path.indexOf("/wp-admin") != -1 || req.path.indexOf("/shell") != -1 || req.path.indexOf("/admin") != -1 || req.path.indexOf("/mysqladmin") != -1) {
+			fetch(`https://api.cloudflare.com/client/v4/zones/${settings.cloudflare.zone}/firewall/access_rules/rules`, {
+				method: "POST",
+				body: JSON.stringify({
+					mode: "challenge",
+					configuration: {
+						target: "ip",
+						value: req.headers['x-real-ip']
+					},
+					notes: `Tried accessing :: ${req.path}`
+				}),
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Auth-Key': settings.cloudflare.key,
+					'X-Auth-Email': settings.cloudflare.email
+				}
+			});
+		}
+	}
+
 	var err = new Error('Not Found');
 	err.status = 404;
 	next(err);

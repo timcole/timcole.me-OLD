@@ -10,5 +10,10 @@ module.exports = {
 	twitch: {
 		client_id: process.env.TWITCH_CLIENT_ID,
 		channel: process.env.TWITCH_CHANNEL
+	},
+	cloudflare: {
+		zone: process.env.CLOUDFLARE_ZONE,
+		key: process.env.CLOUDFLARE_KEY,
+		email: process.env.CLOUDFLARE_EMAIL
 	}
 }
