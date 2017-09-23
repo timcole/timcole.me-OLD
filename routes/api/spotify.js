@@ -37,7 +37,7 @@ var authorization = async (redis, cb) => {
 	if (!request.error) {
 		cb(auth, null);
 	} else {
-		var request = await fetch('https://accounts.spotify.com/api/token', {
+		var refresh_request = await fetch('https://accounts.spotify.com/api/token', {
 			headers: { 'Authorization': 'Basic ' + (new Buffer(settings.spotify.client_id + ':' + settings.spotify.client_secret).toString('base64')) },
 			form: {
 				grant_type: 'refresh_token',
@@ -45,12 +45,12 @@ var authorization = async (redis, cb) => {
 			}
 		}).then((data) => { return data.json() });
 
-		if (!request.error) {
-			auth.token = request.access_token;
+		if (!refresh_request.error) {
+			auth.token = refresh_request.access_token;
 			redis.set("tc::auth::spotify", JSON.stringify(auth));
 			cb(auth, null);
 		} else {
-			cb({}, request.error || "Failed to location authorization token.")
+			cb({}, refresh_request.error || "Failed to location authorization token.")
 		}
 	}
 }
