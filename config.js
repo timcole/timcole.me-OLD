@@ -1,7 +1,10 @@
 require('dotenv').config()
 
 module.exports = {
-	cdn: 'https://tcole.me/s/',
+	website: {
+		cdn: process.env.WEBSITE_CDN,
+		pass: process.env.WEBSITE_PASS
+	},
 	spotify: {
 		client_id: process.env.SPOTIFY_CLIENT_ID,
 		client_secret: process.env.SPOTIFY_CLIENT_SECRET,

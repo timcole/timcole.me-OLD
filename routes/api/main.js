@@ -2,8 +2,6 @@ var express = require('express');
 var fetch = require('node-fetch');
 var router = express.Router();
 
-var settings = require('express');
-
 router.all('/spotify*', require('./spotify'));
 router.all('/weetbot*', require('./weetbot'));
 
@@ -23,6 +21,34 @@ router.get('/stream', async function(req, res) {
 	res.status(200).json({
 		status: 200,
 		stream: stream
+	});
+});
+
+router.get('/stream/waitingMessage', async function(req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	var redis = req.app.get('redis');
+
+	var message = await redis.getAsync("stream::message");
+
+	res.status(200).json({
+		status: 200,
+		message
+	});
+});
+
+router.post('/stream/waitingMessage', async function(req, res, next) {
+	var settings = req.app.get('settings');
+	if (typeof req.headers.authorization === 'undefined' || req.headers.authorization !== settings.website.pass) { next(); return; }
+	if (typeof req.body.message === 'undefined') { next(); return; }
+
+	res.setHeader('Content-Type', 'application/json');
+	var redis = req.app.get('redis');
+
+	var set = await redis.setAsync("stream::message", req.body.message);
+
+	res.status(200).json({
+		status: 200,
+		set
 	});
 });
 
