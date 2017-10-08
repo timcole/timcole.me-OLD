@@ -421,7 +421,7 @@ body {
 			i.icon {
 				order: 4;
 				color: #fff;
-				display: inline-block !important;
+				// display: inline-block !important;
 				line-height: inherit;
 
 				&:not(:first-child) {
@@ -472,6 +472,8 @@ body {
 					a {
 						margin: 0 !important;
 						z-index: 9999 !important;
+
+						&.meta-btn { display: none; }
 					}
 
 					li {

@@ -21,6 +21,7 @@ $cubic: cubic-bezier(.64,.09,.08,1);
 @import "components/columns";
 @import "components/stream";
 @import "components/screenshots";
+@import "components/commands";
 
 ::selection {
 	background-color: lighten($primaryColor, 50%) !important;

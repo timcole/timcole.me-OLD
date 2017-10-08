@@ -17,4 +17,10 @@ router.get('/music', function(req, res, next) {
 	});
 });
 
+router.get('/commands', function(req, res, next) {
+	res.render('stream/commands', {
+		title: "WeetBot Stream Commands"
+	});
+});
+
 module.exports = router;

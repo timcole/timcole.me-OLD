@@ -38,3 +38,7 @@ body#stream {
 		}
 	}
 }
+
+@media only screen and (max-width: 600px) {
+	body#stream * .container { max-width: 100% !important; }
+}

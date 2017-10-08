@@ -12,7 +12,8 @@
 					follow: `<i class="icon">&#xE87D;</i>Follow <span class="meta-data">{{ followers }}</span>`,
 					viewers: `<i class="icon">&#xE7FB;</i>{{ viewers }}`
 				},
-				music: []
+				music: [],
+				commands: []
 			}
 		},
 		load: () => {
@@ -23,6 +24,9 @@
 					break;
 				case "/stream/music":
 					tc.stream.music();
+					break;
+				case "/stream/commands":
+					tc.stream.commands();
 					break;
 			}
 			tc.header();
@@ -223,6 +227,26 @@
 				// 		table.appendChild(tr);
 				// 	}
 				// });
+			},
+			commands: () => {
+				var commandList = document.getElementById("commandList");
+
+				fetch('/api/weetbot/commands').then(function (response) {
+					return response.json();
+				}).then(function(j) {
+					for (var i = 0; i < j.commands.length; i++) {
+						var commandDOM = document.createElement("tr");
+						var command = document.createElement("td");
+						var response = document.createElement("td");
+
+						command.innerText = j.commands[i].command;
+						response.innerText = j.commands[i].response;
+
+						commandDOM.appendChild(command);
+						commandDOM.appendChild(response);
+						commandList.appendChild(commandDOM);
+					}
+				});
 			}
 		}
 	}

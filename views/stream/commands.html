@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>[[ title ]] - Timothy Cole</title>
+	<link rel="stylesheet" href="/css/main.css?_=[[ rand ]]">
+
+	{% include "../../parts/meta.html" ignore missing %}
+</head>
+<body>
+	{% include "../../parts/menu.html" %}
+
+	<tc-body>
+		<tc-container class="fixed commands">
+			<div class="row">
+				<div class="col-12">
+					<table class="dp-1">
+						<thead>
+							<tr>
+								<td>Command</td>
+								<td>Response</td>
+							</tr>
+						</thead>
+						<tbody id="commandList"></tbody>
+					</table>
+				</div>
+			</div>
+		</tc-container>
+	</tc-body>
+
+	{% include "../../parts/footer.html" %}
+
+	<script src="/js/script.js"></script>
+</body>
+</html>
