@@ -38,11 +38,15 @@ var authorization = async (redis, cb) => {
 		cb(auth, null);
 	} else {
 		var refresh_request = await fetch('https://accounts.spotify.com/api/token', {
-			headers: { 'Authorization': 'Basic ' + (new Buffer(settings.spotify.client_id + ':' + settings.spotify.client_secret).toString('base64')) },
-			form: {
+			method: "POST",
+			headers: {
+				'Authorization': 'Basic ' + (new Buffer(settings.spotify.client_id + ':' + settings.spotify.client_secret).toString('base64')),
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: formBuilder({
 				grant_type: 'refresh_token',
 				refresh_token: auth.refresh
-			}
+			})
 		}).then((data) => { return data.json() });
 
 		if (!refresh_request.error) {
