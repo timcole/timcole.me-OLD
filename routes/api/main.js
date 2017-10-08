@@ -58,6 +58,7 @@ router.get('/stream/chat', async function(req, res) {
 
 router.get('/stream/waitingMessage', async function(req, res) {
 	res.setHeader('Content-Type', 'application/json');
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	var redis = req.app.get('redis');
 
 	var message = await redis.getAsync("stream::message");
