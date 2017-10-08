@@ -12,7 +12,8 @@ module.exports = {
 	},
 	twitch: {
 		client_id: process.env.TWITCH_CLIENT_ID,
-		channel: process.env.TWITCH_CHANNEL
+		channel: process.env.TWITCH_CHANNEL,
+		emotesets: process.env.TWITCH_EMOTESETS
 	},
 	cloudflare: {
 		zone: process.env.CLOUDFLARE_ZONE,

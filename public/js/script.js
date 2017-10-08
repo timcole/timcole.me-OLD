@@ -229,23 +229,28 @@
 				// });
 			},
 			commands: () => {
-				var commandList = document.getElementById("commandList");
+				Emote.loadEmotes(function () {
+					var commandList = document.getElementById("commandList");
 
-				fetch('/api/weetbot/commands').then(function (response) {
-					return response.json();
-				}).then(function(j) {
-					for (var i = 0; i < j.commands.length; i++) {
-						var commandDOM = document.createElement("tr");
-						var command = document.createElement("td");
-						var response = document.createElement("td");
+					fetch('/api/weetbot/commands').then(function (response) {
+						return response.json();
+					}).then(function (j) {
+						for (var i = 0; i < j.commands.length; i++) {
+							var commandDOM = document.createElement("tr");
+							var command = document.createElement("td");
+							var response = document.createElement("td");
 
-						command.innerText = j.commands[i].command;
-						response.innerText = j.commands[i].response;
+							command.innerText = j.commands[i].command.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+							response.innerText = j.commands[i].response.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-						commandDOM.appendChild(command);
-						commandDOM.appendChild(response);
-						commandList.appendChild(commandDOM);
-					}
+							command.innerHTML = Emote.emoteCheck(command.innerText);
+							response.innerHTML = Emote.emoteCheck(response.innerText);
+
+							commandDOM.appendChild(command);
+							commandDOM.appendChild(response);
+							commandList.appendChild(commandDOM);
+						}
+					});
 				});
 			}
 		}

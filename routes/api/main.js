@@ -24,6 +24,38 @@ router.get('/stream', async function(req, res) {
 	});
 });
 
+router.get('/stream/chat', async function(req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	var settings = req.app.get('settings');
+
+	var headers = {
+		Accept: "application/vnd.twitchtv.v5+json",
+		'Client-ID': settings.twitch.client_id
+	}
+
+	var selfGet = await fetch(`https://api.twitch.tv/kraken/chat/emoticon_images?emotesets=${settings.twitch.emotesets}`, { headers }).then((data) => { return data.json() });
+	var globalGet = await fetch(`https://twitchemotes.com/api_cache/v3/global.json`).then((data) => { return data.json() });
+	var emotes = {
+		self: [],
+		global: []
+	};
+
+	for (var emoteSet in selfGet.emoticon_sets) {
+		Array.prototype.push.apply(emotes.self, selfGet.emoticon_sets[emoteSet]);
+	}
+
+	for (var emoteSet in globalGet) {
+		delete globalGet[emoteSet].description;
+		delete globalGet[emoteSet].emoticon_set;
+		Array.prototype.push.apply(emotes.global, [globalGet[emoteSet]]);
+	}
+
+	res.status(200).json({
+		status: 200,
+		emotes
+	});
+});
+
 router.get('/stream/waitingMessage', async function(req, res) {
 	res.setHeader('Content-Type', 'application/json');
 	var redis = req.app.get('redis');

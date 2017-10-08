@@ -3,5 +3,8 @@ tc-container.commands {
 		thead tr td {
 			padding: 10px;
 		}
+		tbody tr td * {
+			vertical-align: middle;
+		}
 	}
 }
