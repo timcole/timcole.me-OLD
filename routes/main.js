@@ -17,7 +17,7 @@ router.get('/setup', function(req, res, next) {
 router.get('/ss/:file', async function(req, res, next) {
 	var file = req.params.file;
 	var fileType = file.substring(file.length - 4);
-	var cdn = req.app.get("settings").cdn;
+	var cdn = req.app.get("settings").website.cdn;
 
 	var cdnCheck = await fetch(`${cdn}${file}`).then((data) => { return data.status; });
 
