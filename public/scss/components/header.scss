@@ -365,9 +365,12 @@ body {
 		border-bottom: 2px solid lighten($secondaryColor, 10%);
 		color: #fff;
 
+		a { color: inherit; text-decoration: inherit; }
+
 		&.success { background-color: #32b462; border-color: #60be83; }
 		&.warning { background-color: #e2992c; border-color: #c4882e; }
 		&.danger { background-color: #b43232; border-color: #cb6262; }
+		&.info { background-color: $accentColor; border-color: darken($accentColor, 10%); }
 
 		&.closeable {
 			text-align: left;

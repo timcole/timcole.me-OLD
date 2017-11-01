@@ -62,6 +62,9 @@ router.get('/ref/:site', function(req, res, next) {
 		case "reddit":
 			res.redirect('https://reddit.com/u/timothycole');
 			break;
+		case "codww2event": // Call of Duty WWII Launch Party Twitch Event
+			res.redirect('https://www.twitch.tv/events/UjSt-gvvRXq1fKakYxF6ig');
+			break;
 		default:
 			var err = new Error('Not Found');
 			err.status = 404;
