@@ -99,9 +99,9 @@
 		},
 		stream: {
 			index: () => {
-				var video = new Twitch.Player("video", {
+				var video = new Twitch.Embed("video", {
 					channel: (meta.channel ? meta.channel : "modesttim"),
-					layout: "video",
+					theme: "dark",
 					height: "100%",
 					width: "100%"
 				});

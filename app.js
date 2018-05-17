@@ -16,7 +16,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 
 var settings = require('./config.js');
 var app = express();
-var client  = redis.createClient();
+var client  = redis.createClient(settings.redis);
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
@@ -32,7 +32,7 @@ app.use(favicon(path.join(__dirname, 'public', '/images/logo.png')));
 app.enable('trust proxy');
 app.use(logger('combined', {
 	skip: function (req, res) {
-		return (req.headers['x-real-ip'] == "162.208.49.199" || typeof req.headers['x-real-ip'] == "undefined");
+		return (typeof req.headers['x-real-ip'] == "undefined");
 	}
 }));
 app.use(bodyParser.json());
@@ -48,25 +48,23 @@ app.use('/api', require('./routes/api/main'));
 app.use('/stream', require('./routes/stream'));
 
 app.use(function(req, res, next) {
-	if (req.headers['x-real-ip'] != "162.208.49.199") {
-		if (req.path.indexOf("/phpmyadmin") != -1 || req.path.indexOf("/wp-admin") != -1 || req.path.indexOf("/shell") != -1 || req.path.indexOf("/admin") != -1 || req.path.indexOf("/mysqladmin") != -1) {
-			fetch(`https://api.cloudflare.com/client/v4/zones/${settings.cloudflare.zone}/firewall/access_rules/rules`, {
-				method: "POST",
-				body: JSON.stringify({
-					mode: "challenge",
-					configuration: {
-						target: "ip",
-						value: req.headers['x-real-ip']
-					},
-					notes: `Tried accessing :: ${req.path}`
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-					'X-Auth-Key': settings.cloudflare.key,
-					'X-Auth-Email': settings.cloudflare.email
-				}
-			});
-		}
+	if (req.path.indexOf("/phpmyadmin") != -1 || req.path.indexOf("/wp-admin") != -1 || req.path.indexOf("/shell") != -1 || req.path.indexOf("/admin") != -1 || req.path.indexOf("/mysqladmin") != -1) {
+		fetch(`https://api.cloudflare.com/client/v4/zones/${settings.cloudflare.zone}/firewall/access_rules/rules`, {
+			method: "POST",
+			body: JSON.stringify({
+				mode: "challenge",
+				configuration: {
+					target: "ip",
+					value: req.headers['x-real-ip']
+				},
+				notes: `Tried accessing :: ${req.path}`
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Auth-Key': settings.cloudflare.key,
+				'X-Auth-Email': settings.cloudflare.email
+			}
+		});
 	}
 
 	var err = new Error('Not Found');

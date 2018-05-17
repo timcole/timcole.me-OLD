@@ -19,5 +19,8 @@ module.exports = {
 		zone: process.env.CLOUDFLARE_ZONE,
 		key: process.env.CLOUDFLARE_KEY,
 		email: process.env.CLOUDFLARE_EMAIL
+	},
+	redis: {
+
 	}
 }
